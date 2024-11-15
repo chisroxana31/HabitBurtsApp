@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "601966408948",
+    "project_id": "habitburst-398b5",
+    "storage_bucket": "habitburst-398b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601966408948:android:36ee643a74123f9cf4daa1",
+        "android_client_info": {
+          "package_name": "com.example.habitburtsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLoGikd4GpmP6mTp2Bi1ReRHyCvA3ORjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

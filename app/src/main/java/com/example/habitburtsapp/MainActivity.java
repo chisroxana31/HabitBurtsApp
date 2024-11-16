@@ -1,5 +1,6 @@
 package com.example.habitburtsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,24 +28,14 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
 
         // Set click listeners for the buttons
-        signUpButton.setOnClickListener(v -> createUser(emailField.getText().toString(), passwordField.getText().toString()));
+        signUpButton.setOnClickListener(v -> {
+            // Redirect to SignUpActivity
+            Intent intent = new Intent(MainActivity.this, com.example.habitburtsapp.SignUpActivity.class);
+            startActivity(intent);
+        });
+
         loginButton.setOnClickListener(v -> loginUser(emailField.getText().toString(), passwordField.getText().toString()));
 
-    }
-
-    private void createUser(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign-up success
-                        FirebaseUser user = auth.getCurrentUser();
-                        assert user != null;
-                        Toast.makeText(MainActivity.this, "User created: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Sign-up failure
-                        Toast.makeText(MainActivity.this, "Authentication failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
     private void loginUser(String email, String password) {
@@ -55,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseUser user = auth.getCurrentUser();
                         assert user != null;
                         Toast.makeText(MainActivity.this, "Welcome: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        // Redirect to HomeActivity after successful login
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+
+                        // Call finish() to prevent going back to the login screen when the user presses the back button
+                        finish();
                     } else {
                         // Login failure
                         Toast.makeText(MainActivity.this, "Login failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void logoutUser() {
-        auth.signOut();
-        Toast.makeText(MainActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -25,7 +25,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#66BB6A"
+        android:backgroundTint="#2196F3"
         android:text="@string/log_out"
         android:textColor="#FFFFFF"
         tools:ignore="MissingConstraints" />

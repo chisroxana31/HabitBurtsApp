@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.habitburtsapp.MainActivity;
 import com.example.habitburtsapp.databinding.FragmentSettingsBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsFragment extends Fragment {
 
@@ -40,7 +42,9 @@ public class SettingsFragment extends Fragment {
 
     private void logoutUser() {
         // Sign out from Firebase Authentication
+        Toast.makeText(getContext(), "Logged out" , Toast.LENGTH_SHORT).show();
         FirebaseAuth.getInstance().signOut();
+
 
         // Redirect to MainActivity (Login screen)
         Intent intent = new Intent(getActivity(), MainActivity.class);

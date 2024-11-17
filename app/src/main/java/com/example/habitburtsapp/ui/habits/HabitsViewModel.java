@@ -1,14 +1,14 @@
-package com.example.habitburtsapp.ui.gallery;
+package com.example.habitburtsapp.ui.habits;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class HabitsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public HabitsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

@@ -10,6 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_settings">Settings</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -67,4 +68,6 @@
     <string name="new_here_sign_up">New here? Sign Up!</string>
     <string name="habitburst">HabitBurst</string>
     <string name="todo">TODO</string>
+    <string name="log_out">Log Out</string>
+    <string name="habits">Habits</string>
 </resources>

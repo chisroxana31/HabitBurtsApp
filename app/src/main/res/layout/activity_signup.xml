@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#4CAF50" />
+        android:backgroundTint="#66BB6A" />
 
     <!-- Go Back Button -->
     <Button

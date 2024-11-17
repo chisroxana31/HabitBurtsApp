@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
+
+        // **CHECK IF USER IS ALREADY LOGGED IN**
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) { // If a user is logged in, skip login and go to HomeActivity
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish(); // Prevent going back to MainActivity
+        }
+
         // Connect UI components to Java variables
         EditText emailField = findViewById(R.id.emailField);
         EditText passwordField = findViewById(R.id.passwordField);

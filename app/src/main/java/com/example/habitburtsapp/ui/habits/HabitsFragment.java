@@ -1,4 +1,4 @@
-package com.example.habitburtsapp.ui.slideshow;
+package com.example.habitburtsapp.ui.habits;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.habitburtsapp.databinding.FragmentSlideshowBinding;
+import com.example.habitburtsapp.databinding.FragmentHabitsBinding;
 
-public class SlideshowFragment extends Fragment {
+public class HabitsFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentHabitsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        HabitsViewModel habitsViewModel =
+                new ViewModelProvider(this).get(HabitsViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentHabitsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textGallery;
+        habitsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

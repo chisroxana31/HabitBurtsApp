@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#b079ee"
+            android:background="#66BB6A"
             app:popupTheme="@style/Theme.HabitBurtsApp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

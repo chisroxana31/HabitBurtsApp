@@ -70,4 +70,6 @@
     <string name="todo">TODO</string>
     <string name="log_out">Log Out</string>
     <string name="habits">Habits</string>
+    <string name="view_details">View Details</string>
+    <string name="habit_name">Habit Name</string>
 </resources>

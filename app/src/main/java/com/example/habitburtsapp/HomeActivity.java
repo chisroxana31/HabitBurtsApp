@@ -1,8 +1,10 @@
 package com.example.habitburtsapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -15,12 +17,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.habitburtsapp.databinding.ActivityHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,49 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // Get the header view from the NavigationView
+        View headerView = navigationView.getHeaderView(0);
+
+        // Access TextViews in the header
+        TextView nameTextView = headerView.findViewById(R.id.textViewName);
+        TextView emailTextView = headerView.findViewById(R.id.textViewEmail);
+
+        // Get the current Firebase user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid(); // Get user ID
+            String email = user.getEmail(); // Get email
+
+            // Set the email
+            if (email != null) {
+                emailTextView.setText(email);
+            }
+
+            // Fetch firstName and lastName from Firestore
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Get firstName and lastName from Firestore document
+                        String firstName = document.getString("firstName");
+                        String lastName = document.getString("lastName");
+
+                        // Set the name TextView
+                        if (firstName != null && lastName != null) {
+                            nameTextView.setText(firstName + " " + lastName);
+                        } else {
+                            nameTextView.setText("Name not available");
+                        }
+                    } else {
+                        nameTextView.setText("Document not found");
+                    }
+                } else {
+                    nameTextView.setText("Error loading name");
+                }
+            });
+        }
     }
 
     @Override

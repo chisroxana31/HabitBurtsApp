@@ -72,4 +72,6 @@
     <string name="habits">Habits</string>
     <string name="view_details">View Details</string>
     <string name="habit_name">Habit Name</string>
+    <string name="current">Current</string>
+    <string name="current_habit">Current Habit</string>
 </resources>

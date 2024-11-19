@@ -12,6 +12,12 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_habits"
             android:title="@string/habits" />
+
+        <item
+            android:id="@+id/nav_current"
+            android:icon="@drawable/ic_current"
+            android:title="@string/current_habit" />
+
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"

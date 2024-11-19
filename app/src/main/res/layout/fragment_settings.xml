@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment">
 
+    <!-- Change Password Button -->
     <TextView
         android:id="@+id/text_settings"
         android:layout_width="match_parent"
@@ -17,9 +18,61 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.301" />
 
+    <!-- Password Change Form -->
+
+    <Button
+        android:id="@+id/changePasswordButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="48dp"
+        android:text="Change Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_settings" />
+
+    <LinearLayout
+        android:id="@+id/passwordChangeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/changePasswordButton">
+
+        <EditText
+            android:id="@+id/newPasswordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter New Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/confirmNewPasswordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm New Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/savePasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Password"
+            android:backgroundTint="#66BB6A"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
     <!-- Log Out Button -->
     <Button
         android:id="@+id/logoutButton"
@@ -28,5 +81,7 @@
         android:backgroundTint="#2196F3"
         android:text="@string/log_out"
         android:textColor="#FFFFFF"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="341dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

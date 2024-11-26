@@ -89,7 +89,7 @@ public class SettingsFragment extends Fragment {
 
     private void logoutUser() {
         // Sign out from Firebase Authentication
-        Toast.makeText(getContext(), "Logged out" , Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Logged Out" , Toast.LENGTH_SHORT).show();
         FirebaseAuth.getInstance().signOut();
 
 

@@ -19,6 +19,57 @@
         android:layout_marginBottom="24dp"
         android:layout_marginTop="150dp"/>
 
+    <!-- Spacer View (Blank Line) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/habitNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="@string/habit_name" />
+
+    <!-- Spacer View (Blank Line) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Details -->
+    <TextView
+        android:id="@+id/habitDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:text="@string/habit_details" />
+
+    <!-- Spacer View (Blank Line) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Timer -->
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:text="@string/time_left_seconds" />
+
+    <!-- Empty space to push the button to the bottom -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <!-- Finish Button -->
     <Button
         android:id="@+id/finishButton"

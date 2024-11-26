@@ -81,4 +81,5 @@
     <string name="close">Close</string>
     <string name="finish">Finish</string>
     <string name="abandon">Abandon</string>
+    <string name="time_left_seconds">Time left: -- seconds</string>
 </resources>

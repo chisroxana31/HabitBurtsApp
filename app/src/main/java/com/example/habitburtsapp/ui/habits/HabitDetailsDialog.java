@@ -3,13 +3,20 @@ package com.example.habitburtsapp.ui.habits;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 
+import com.example.habitburtsapp.HomeActivity;
 import com.example.habitburtsapp.R;
 
 public class HabitDetailsDialog extends Dialog {
@@ -31,7 +38,6 @@ public class HabitDetailsDialog extends Dialog {
         TextView habitTimeText = findViewById(R.id.habit_details_time);
         TextView habitNameText = findViewById(R.id.habit_details_name);
         TextView habitDescriptionText = findViewById(R.id.habit_details_description);
-        Button startChallengeButton = findViewById(R.id.start_challenge_button);
         Button closeButton = findViewById(R.id.close_button);
 
         habitNameText.setText(habit.getName());
@@ -43,10 +49,10 @@ public class HabitDetailsDialog extends Dialog {
             dismiss();
         });
 
-        startChallengeButton.setOnClickListener(v -> {
-            // Start habit challenge logic here
-            dismiss();
-        });
+
 
     }
+
+
+
 }

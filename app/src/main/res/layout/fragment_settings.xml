@@ -73,6 +73,7 @@
             android:backgroundTint="#66BB6A"
             android:textColor="#FFFFFF" />
     </LinearLayout>
+
     <!-- Log Out Button -->
     <Button
         android:id="@+id/logoutButton"
@@ -81,7 +82,6 @@
         android:backgroundTint="#2196F3"
         android:text="@string/log_out"
         android:textColor="#FFFFFF"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="341dp" />
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

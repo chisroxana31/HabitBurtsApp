@@ -1,5 +1,6 @@
 package com.example.habitburtsapp.ui.habits;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.habitburtsapp.MainActivity;
 import com.example.habitburtsapp.R;
 import com.example.habitburtsapp.databinding.FragmentHabitsBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -85,6 +87,8 @@ public class HabitsFragment extends Fragment {
                     }
                 });
     }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -35,11 +35,31 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- Button aligned to the bottom -->
-    <Button
-        android:id="@+id/view_details_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/view_details"
-        android:backgroundTint="#2196F3" />
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <!-- Button 1 -->
+        <Button
+            android:id="@+id/view_details_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_details"
+            android:backgroundTint="#2196F3"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_habit_challenge"
+            android:backgroundTint="#66BB6A"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
 </LinearLayout>

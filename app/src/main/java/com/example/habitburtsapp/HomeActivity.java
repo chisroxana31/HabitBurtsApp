@@ -1,5 +1,8 @@
 package com.example.habitburtsapp;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -30,67 +33,97 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (checkIfInCurrentActivity()) {
+            return; // Early return if redirected to CurrentActivity
+        }
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setUpToolbarAndNavigation();
+
+        fetchAndDisplayUserInfo();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+
+     // Checks if the user is currently in CurrentActivity and redirects them if so.
+     //@return true if redirected to CurrentActivity, false otherwise.
+    private boolean checkIfInCurrentActivity() {
+        SharedPreferences preferences = getSharedPreferences("HabitBurstsPrefs", MODE_PRIVATE);
+        boolean isInCurrentActivity = preferences.getBoolean("isInCurrentActivity", false);
+
+        if (isInCurrentActivity) {
+            Intent intent = new Intent(this, CurrentActivity.class);
+            startActivity(intent);
+            finish(); // Close HomeActivity
+            return true;
+        }
+
+        return false;
+    }
+
+    // Sets up the toolbar, navigation drawer, and app bar configuration.
+    private void setUpToolbarAndNavigation() {
         setSupportActionBar(binding.appBarHome.toolbar);
-        binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        binding.appBarHome.fab.setOnClickListener(view ->
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
+                        .setAnchorView(R.id.fab).show()
+        );
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_settings, R.id.nav_current)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        // Fetch and display user information
-        fetchAndDisplayUserInfo();
     }
 
+    //Fetches and displays the user information in the navigation header.
+    @SuppressLint("SetTextI18n")
     private void fetchAndDisplayUserInfo() {
         NavigationView navigationView = binding.navView;
-
-        // Get the header view from the NavigationView
         View headerView = navigationView.getHeaderView(0);
 
-        // Access TextViews in the header
         TextView nameTextView = headerView.findViewById(R.id.textViewName);
         TextView emailTextView = headerView.findViewById(R.id.textViewEmail);
 
-        // Get the current Firebase user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            String userId = user.getUid(); // Get user ID
-            String email = user.getEmail(); // Get email
+            String userId = user.getUid();
+            String email = user.getEmail();
 
-            // Set the email
             if (email != null) {
                 emailTextView.setText(email);
             }
 
-            // Fetch firstName and lastName from Firestore
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("users").document(userId).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        // Get firstName and lastName from Firestore document
                         String firstName = document.getString("firstName");
                         String lastName = document.getString("lastName");
 
-                        // Set the name TextView
                         if (firstName != null && lastName != null) {
                             nameTextView.setText(firstName + " " + lastName);
                         } else {
@@ -104,19 +137,5 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }

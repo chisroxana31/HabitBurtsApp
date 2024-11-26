@@ -1,15 +1,22 @@
 package com.example.habitburtsapp.ui.habits;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.habitburtsapp.CurrentActivity;
+import com.example.habitburtsapp.HomeActivity;
 import com.example.habitburtsapp.R;
 
 import java.util.List;
@@ -44,7 +51,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         holder.habitType.setText(habit.getType()+ " Habit");
 
         // Set the background based on the type
-        String habitType = habit.getType(); // e.g., "exercise", "meditation"
+        String habitType = habit.getType();
         int backgroundResId ;
 
         // Map the type to the corresponding drawable resource
@@ -78,6 +85,18 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
             HabitDetailsDialog dialog = new HabitDetailsDialog(context, habit);
             dialog.show();
         });
+
+        //Start
+        holder.startHabitButton.setOnClickListener(v->{
+            Toast.makeText(context, "Habit Started" , Toast.LENGTH_SHORT).show();
+
+
+            // Redirect to com.example.habitburtsapp.CurrentActivity
+            Intent intent = new Intent(context, CurrentActivity.class);
+            // Clear the activity stack to prevent the user from returning to the previous activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -89,12 +108,14 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         TextView habitName;
         TextView habitType;
         Button viewDetailsButton;
+        Button startHabitButton;
 
         public HabitViewHolder(@NonNull View itemView) {
             super(itemView);
             habitName = itemView.findViewById(R.id.habit_name);
             habitType = itemView.findViewById(R.id.habit_type);
             viewDetailsButton = itemView.findViewById(R.id.view_details_button);
+            startHabitButton = itemView.findViewById(R.id.start_button);
         }
     }
 }

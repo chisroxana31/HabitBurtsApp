@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.habitburtsapp.R;
 import com.example.habitburtsapp.databinding.FragmentHabitsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HabitsFragment extends Fragment {
@@ -26,6 +29,7 @@ public class HabitsFragment extends Fragment {
     private FragmentHabitsBinding binding;
     private RecyclerView habitsRecyclerView;
     private List<Habit> habitList;
+    private List<String> completedHabitIDs;
     private HabitsAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,19 +49,57 @@ public class HabitsFragment extends Fragment {
 
         // Initialize habitList here as an empty ArrayList
         habitList = new ArrayList<>();
+        completedHabitIDs = new ArrayList<>();
 
-        // Set up adapter with the empty habitList**
-        adapter = new HabitsAdapter(getContext(), habitList);
-        habitsRecyclerView.setAdapter(adapter);
+        // Get database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Fetch habits from Firestore
-        fetchHabitsFromFirestore();
+        // Fetch completed habits from Firestore
+        // Inside this function we then fetch the habits and setup the adapter
+        fetchCompletedHabitsFromFirestore(db);
 
         return root;
     }
+
+    private void fetchCompletedHabitsFromFirestore(FirebaseFirestore db) {
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    List<String> fetchedCompletedHabitIDs = (List<String>) document.get("completedHabitIDs");
+
+                    // If "completedHabitIDs" is null or not set, initialize it as an empty list
+                if (fetchedCompletedHabitIDs == null) {
+                    completedHabitIDs = new ArrayList<>();
+                } else {
+                    // Use a Set to remove duplicates and convert the List to ArrayList
+                    completedHabitIDs = fetchedCompletedHabitIDs;
+                }
+
+            }
+                else {
+                // If the document doesn't exist, initialize completedHabitIDs as an empty list
+                completedHabitIDs = new ArrayList<>();
+            }
+                // Fetch habits
+                fetchHabitsFromFirestore(db);
+
+            }
+
+        });
+
+    }
+
+    private void setupAdapter() {
+        adapter = new HabitsAdapter(getContext(), habitList, completedHabitIDs);
+        habitsRecyclerView.setAdapter(adapter);
+    }
+
     // Fetch habits from Firestore and update the habit list
-    private void fetchHabitsFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private void fetchHabitsFromFirestore(FirebaseFirestore db) {
 
         db.collection("habits")
                 .get()
@@ -77,6 +119,8 @@ public class HabitsFragment extends Fragment {
                             // Add the habit to the list
                             habitList.add(habit);
                         }
+                        // Sort the habit list so that completed habits are at the end
+                        sortHabitList();
                         // Notify adapter about data changes
                         adapter.notifyDataSetChanged();
                     } else {
@@ -84,6 +128,9 @@ public class HabitsFragment extends Fragment {
                          Log.d("HabitsFragment", "Error getting documents: ", task.getException());
                     }
                 });
+
+        // Setup adapter
+        setupAdapter();
     }
 
 
@@ -91,5 +138,27 @@ public class HabitsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void sortHabitList() {
+        // Comparator to prioritize habits not in completedHabitIDs
+        Comparator<Habit> habitComparator = (habit1, habit2) -> {
+            boolean isHabit1Completed = completedHabitIDs.contains(habit1.getHabitID());
+            boolean isHabit2Completed = completedHabitIDs.contains(habit2.getHabitID());
+
+            // If habit1 is completed and habit2 is not, habit2 should come first
+            if (!isHabit1Completed && isHabit2Completed) {
+                return -1; // habit1 comes first
+            }
+            // If habit1 is not completed and habit2 is, habit1 should come first
+            else if (isHabit1Completed && !isHabit2Completed) {
+                return 1; // habit2 comes first
+            }
+
+            return 0; // If both are completed or both are not, maintain original order
+        };
+
+        // Sort the habit list using the comparator
+        Collections.sort(habitList, habitComparator);
     }
 }

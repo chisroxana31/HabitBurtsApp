@@ -84,4 +84,5 @@
     <string name="time_left_seconds">Time left: -- seconds</string>
     <string name="reward">Reward</string>
     <string name="tip">Tip: Finish in time or it doesn\'t count!</string>
+    <string name="done">Done</string>
 </resources>

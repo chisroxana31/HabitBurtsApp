@@ -97,7 +97,7 @@ public class CurrentActivity extends AppCompatActivity {
                 // Clear the flag to indicate the user is leaving CurrentActivity
                 markAsInCurrentActivity(false);
 
-                Toast.makeText(CurrentActivity.this, "Timer finished", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CurrentActivity.this, "Timer finished!", Toast.LENGTH_SHORT).show();
 
 
                 // Redirect to HomeActivity when the timer ends
@@ -136,7 +136,7 @@ public class CurrentActivity extends AppCompatActivity {
 
                 addHabitToCompleted(habitID, starCount);
 
-                Toast.makeText(CurrentActivity.this, "Habit Challenge Finished", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CurrentActivity.this, "Habit Challenge Finished!", Toast.LENGTH_SHORT).show();
 
                 // Redirect to HomeActivity
                 redirectToHomeActivity();
@@ -164,7 +164,7 @@ public class CurrentActivity extends AppCompatActivity {
             //Stop timer
             stopCountdownTimer();
 
-            Toast.makeText(CurrentActivity.this, "Habit Challenge Abandoned", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CurrentActivity.this, "Habit Challenge Abandoned!", Toast.LENGTH_SHORT).show();
 
 
             // Redirect to HomeActivity

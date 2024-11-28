@@ -3,6 +3,7 @@ package com.example.habitburtsapp.ui.habits;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.habitburtsapp.CurrentActivity;
 import com.example.habitburtsapp.R;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewHolder> {
 
     private final List<Habit> habitList;
     private final Context context;
+    private final Set<String> completedHabitIDs;
 
-    public HabitsAdapter(Context context, List<Habit> habitList) {
+    public HabitsAdapter(Context context, List<Habit> habitList, List<String> completedHabitIDs) {
         this.context = context;
         this.habitList = habitList;
+        this.completedHabitIDs = new HashSet<>(completedHabitIDs);
+
     }
 
     @NonNull
@@ -44,11 +50,24 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         bindHabitData(holder, habit);
 
         // Set background based on the habit type
-        setHabitBackground(holder, habit.getType());
+        setHabitBackground(holder, habit.getType(), habit.getHabitID());
 
-        // Set up button listeners
-        setupViewDetailsButton(holder.viewDetailsButton, habit);
-        setupStartHabitButton(holder.startHabitButton, habit);
+        // Setup buttons for non-completed habits
+        if (!completedHabitIDs.contains(habit.getHabitID())) {
+            // Setup buttons
+            setupViewDetailsButton(holder.viewDetailsButton, habit);
+            setupStartHabitButton(holder.startHabitButton, habit);
+
+            // Hide the "Done" label
+            holder.doneLabel.setVisibility(View.INVISIBLE);
+        } else {
+            // Hide buttons
+            holder.viewDetailsButton.setVisibility(View.INVISIBLE);
+            holder.startHabitButton.setVisibility(View.INVISIBLE);
+
+            // Show the "Done" label
+            holder.doneLabel.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -64,9 +83,32 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
     }
 
     //Sets the background of the habit item based on its type.
-    private void setHabitBackground(@NonNull HabitViewHolder holder, @NonNull String habitType) {
+    private void setHabitBackground(@NonNull HabitViewHolder holder, @NonNull String habitType, String habitID) {
         int backgroundResId;
 
+        // Modify background for completed habits
+        if(completedHabitIDs.contains(habitID)){
+            switch (habitType.toLowerCase()) {
+                case "exercise":
+                    backgroundResId = R.drawable.exercise_bw;
+                    break;
+                case "meditation":
+                    backgroundResId = R.drawable.meditation_bw;
+                    break;
+                case "reading":
+                    backgroundResId = R.drawable.reading_bw;
+                    break;
+                case "writing":
+                    backgroundResId = R.drawable.writing_bw;
+                    break;
+                case "music":
+                    backgroundResId = R.drawable.music;
+                    break;
+                default:
+                    backgroundResId = R.drawable.box_background; // Fallback background
+                    break;
+            }
+        } else {
         switch (habitType.toLowerCase()) {
             case "exercise":
                 backgroundResId = R.drawable.exercise;
@@ -87,7 +129,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
                 backgroundResId = R.drawable.box_background; // Fallback background
                 break;
         }
-
+}
         holder.itemView.setBackgroundResource(backgroundResId);
     }
 
@@ -120,7 +162,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
     //Sets up the Start Habit button click listener
     private void setupStartHabitButton(@NonNull Button button, @NonNull Habit habit) {
         button.setOnClickListener(v -> {
-            Toast.makeText(context, "Habit Challenge Started", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Habit Challenge Started!", Toast.LENGTH_SHORT).show();
 
             // Redirect to CurrentActivity with habit details
             Intent intent = new Intent(context, CurrentActivity.class);
@@ -139,6 +181,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
         TextView habitType;
         Button viewDetailsButton;
         Button startHabitButton;
+        TextView doneLabel;
 
         public HabitViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -146,6 +189,9 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
             habitType = itemView.findViewById(R.id.habit_type);
             viewDetailsButton = itemView.findViewById(R.id.view_details_button);
             startHabitButton = itemView.findViewById(R.id.start_button);
+            doneLabel = itemView.findViewById(R.id.done_label);
         }
     }
+
+
 }

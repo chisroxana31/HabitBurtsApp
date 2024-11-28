@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         // Login success
                         FirebaseUser user = auth.getCurrentUser();
                         assert user != null;
-                        Toast.makeText(MainActivity.this, "Welcome: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Welcome: " + user.getEmail()+"!", Toast.LENGTH_SHORT).show();
                         // Redirect to HomeActivity after successful login
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     } else {
                         // Login failure
-                        Toast.makeText(MainActivity.this, "Login failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Login failed: " + Objects.requireNonNull(task.getException()).getMessage()+"!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

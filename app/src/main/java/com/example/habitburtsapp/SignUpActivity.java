@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -69,6 +70,8 @@ public class SignUpActivity extends AppCompatActivity {
                             userInfo.put("firstName", firstName);
                             userInfo.put("lastName", lastName);
                             userInfo.put("email", email);
+                            userInfo.put("stars", 0);
+                            userInfo.put("completedHabitIDs", new ArrayList<>());
 
                             db.collection("users").document(user.getUid())
                                     .set(userInfo)

@@ -1,7 +1,7 @@
 package com.example.habitburtsapp.ui.habits;
 
 public class Habit {
-    // Private attributes
+    private String habitID;
     private String name;
     private String description;
     private String type;
@@ -9,7 +9,6 @@ public class Habit {
 
     // Default constructor
     public Habit() {
-        // Default constructor (useful for frameworks like Firebase)
     }
 
     // Getter and setter for name
@@ -46,5 +45,13 @@ public class Habit {
 
     public void setTime(int time) {
         this.time = time;
+    }
+
+    public String getHabitID() {
+        return habitID;
+    }
+
+    public void setHabitID(String habitID) {
+        this.habitID = habitID;
     }
 }

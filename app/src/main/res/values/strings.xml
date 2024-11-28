@@ -82,4 +82,6 @@
     <string name="finish">Finish</string>
     <string name="abandon">Abandon</string>
     <string name="time_left_seconds">Time left: -- seconds</string>
+    <string name="reward">Reward</string>
+    <string name="tip">Tip: Finish in time or it doesn\'t count!</string>
 </resources>

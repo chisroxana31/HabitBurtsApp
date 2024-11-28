@@ -54,6 +54,21 @@
         android:layout_width="match_parent"
         android:layout_height="16dp" />
 
+    <!-- Reward -->
+    <TextView
+        android:id="@+id/habitRewardTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="60sp"
+        android:layout_gravity="center"
+        android:text="@string/reward" />
+
+    <!-- Spacer View (Blank Line) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
     <!-- Timer -->
     <TextView
         android:id="@+id/timerTextView"
@@ -63,6 +78,23 @@
         android:textSize="18sp"
         android:layout_gravity="center"
         android:text="@string/time_left_seconds" />
+
+
+    <!-- Empty space to push the button to the bottom -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Finish Message -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:text="@string/tip" />
 
     <!-- Empty space to push the button to the bottom -->
     <View

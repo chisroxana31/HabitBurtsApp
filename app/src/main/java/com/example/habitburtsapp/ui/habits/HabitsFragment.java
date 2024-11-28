@@ -1,6 +1,5 @@
 package com.example.habitburtsapp.ui.habits;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,10 +43,10 @@ public class HabitsFragment extends Fragment {
         habitsRecyclerView = root.findViewById(R.id.habits_recycler_view);
         habitsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // **Initialize habitList here as an empty ArrayList**
+        // Initialize habitList here as an empty ArrayList
         habitList = new ArrayList<>();
 
-        // **Set up adapter with the empty habitList**
+        // Set up adapter with the empty habitList**
         adapter = new HabitsAdapter(getContext(), habitList);
         habitsRecyclerView.setAdapter(adapter);
 
@@ -60,7 +59,7 @@ public class HabitsFragment extends Fragment {
     private void fetchHabitsFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("habits") // Replace with your Firestore collection name
+        db.collection("habits")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -69,6 +68,7 @@ public class HabitsFragment extends Fragment {
                             // Create a Habit object from Firestore document
                             Habit habit = new Habit();
                             if(document.exists()) {
+                                habit.setHabitID(document.getId());
                                 habit.setName(document.getString("name"));
                                 habit.setDescription(document.getString("description"));
                                 habit.setType(document.getString("type"));

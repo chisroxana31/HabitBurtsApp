@@ -57,6 +57,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
     }
 
     //Binds the habit data to the view holder.
+    @SuppressLint("SetTextI18n")
     private void bindHabitData(@NonNull HabitViewHolder holder, @NonNull Habit habit) {
         holder.habitName.setText(habit.getName());
         holder.habitType.setText(habit.getType() + " Habit");
@@ -93,10 +94,28 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
     //Sets up the View Details button click listener.
     private void setupViewDetailsButton(@NonNull Button button, @NonNull Habit habit) {
         button.setOnClickListener(v -> {
-            HabitDetailsDialog dialog = new HabitDetailsDialog(context, habit);
-            dialog.show();
+
+            // Calculate the number of stars based on time
+            String formattedMessage = habit.getDescription() + "<br>" +
+                    "<div style='text-align: center; '>Time: " + habit.getTime() + ":00</div>" +
+                    "<div style='text-align: center'>" + "Reward: "+ getRewardString(habit)+ "</div>";
+
+
+            // Build the dialog with a formatted message
+            new androidx.appcompat.app.AlertDialog.Builder(context)
+                    .setTitle(habit.getName() + "\n\n" )
+                    .setMessage(android.text.Html.fromHtml(formattedMessage, android.text.Html.FROM_HTML_MODE_LEGACY))
+                    .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                    .show();
         });
     }
+
+    @NonNull
+    private static String getRewardString(@NonNull Habit habit) {
+        int starCount = habit.getTime() / 3; // 1 star for every 3 minutes
+        return "★".repeat(Math.max(0, starCount)); // Repeat the star symbol starCount times
+    }
+
 
     //Sets up the Start Habit button click listener
     private void setupStartHabitButton(@NonNull Button button, @NonNull Habit habit) {
@@ -105,9 +124,11 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
 
             // Redirect to CurrentActivity with habit details
             Intent intent = new Intent(context, CurrentActivity.class);
+            intent.putExtra("habit_id", habit.getHabitID());
             intent.putExtra("habit_name", habit.getName());
             intent.putExtra("habit_description", habit.getDescription());
             intent.putExtra("habit_duration", habit.getTime() * 60); // Duration in seconds
+            intent.putExtra("habit_reward", getRewardString(habit));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
         });

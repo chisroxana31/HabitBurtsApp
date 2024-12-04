@@ -155,7 +155,7 @@ public class HabitsAdapter extends RecyclerView.Adapter<HabitsAdapter.HabitViewH
     @NonNull
     private static String getRewardString(@NonNull Habit habit) {
         int starCount = habit.getTime() / 3; // 1 star for every 3 minutes
-        return "★".repeat(Math.max(0, starCount)); // Repeat the star symbol starCount times
+        return "⭐".repeat(Math.max(0, starCount)); // Repeat the star symbol starCount times
     }
 
 

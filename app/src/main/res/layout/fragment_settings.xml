@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,36 +7,41 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <!-- Title -->
+
+    <!-- Change Name Button -->
+
+    <!-- Name Change Layout (Initially hidden) -->
+
     <TextView
         android:id="@+id/text_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="8dp"
         android:text="Settings"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateIds" />
 
-    <!-- Change Name Button -->
     <Button
         android:id="@+id/changeNameButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Change Name"
+        android:layout_marginTop="236dp"
         android:backgroundTint="@color/purple_500"
+        android:text="Change Name"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_settings" />
 
-    <!-- Name Change Layout (Initially hidden) -->
     <LinearLayout
         android:id="@+id/nameChangeLayout"
         android:layout_width="match_parent"
@@ -52,45 +56,47 @@
             android:id="@+id/newFirstNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter New First Name"
-            android:padding="12dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/edittext_background"
-            android:layout_marginBottom="8dp" />
+            android:hint="Enter New First Name"
+            android:padding="12dp" />
 
         <!-- New Last Name Input -->
         <EditText
             android:id="@+id/newLastNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter New Last Name"
-            android:padding="12dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/edittext_background"
-            android:layout_marginBottom="8dp" />
+            android:hint="Enter New Last Name"
+            android:padding="12dp" />
 
         <!-- Save Name Button -->
         <Button
             android:id="@+id/saveNameButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Name"
             android:backgroundTint="@color/teal_700"
+            android:text="Save Name"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
 
-
     <!-- Change Password Button -->
+
     <Button
         android:id="@+id/changePasswordButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Change Password"
+        android:layout_marginTop="240dp"
         android:backgroundTint="#66BB6A"
+        android:text="Change Password"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/nameChangeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/nameChangeLayout" />
 
     <LinearLayout
         android:id="@+id/passwordChangeLayout"
@@ -105,42 +111,59 @@
             android:id="@+id/newPasswordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_background"
             android:hint="Enter New Password"
             android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="8dp" />
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/confirmNewPasswordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edittext_background"
             android:hint="Confirm New Password"
             android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="@drawable/edittext_background"
-            android:layout_marginBottom="8dp" />
+            android:padding="12dp" />
 
         <Button
             android:id="@+id/savePasswordButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_200"
             android:text="Save Password"
-            android:backgroundTint="#66BB6A"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <!-- Log Out Button -->
+
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Log Out"
+        android:layout_marginTop="236dp"
         android:backgroundTint="#2196F3"
+        android:text="Log Out"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/passwordChangeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/passwordChangeLayout" />
+
+    <TextView
+        android:id="@+id/signInDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:text="@string/account_created_at"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="@+id/logoutButton"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="426dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

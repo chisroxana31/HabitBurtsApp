@@ -2,12 +2,14 @@ package com.example.habitburtsapp.ui.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,10 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
+
 public class SettingsFragment extends Fragment {
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
+
+    private TextView signInDateText;
 
     public SettingsFragment() {
         super(R.layout.fragment_settings);
@@ -49,6 +55,12 @@ public class SettingsFragment extends Fragment {
         EditText newPasswordField = root.findViewById(R.id.newPasswordField);
         EditText confirmNewPasswordField = root.findViewById(R.id.confirmNewPasswordField);
         Button savePasswordButton = root.findViewById(R.id.savePasswordButton);
+
+        // Initialize the TextView for the sign-in date
+        signInDateText = root.findViewById(R.id.signInDateText);
+
+        // Display the sign-in date
+        displaySignInDate();
 
         // Show layout for name change on button click (Toggling visibility)
         changeNameButton.setOnClickListener(v -> {
@@ -140,4 +152,23 @@ public class SettingsFragment extends Fragment {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
+    // Method to display the sign-in date
+    private void displaySignInDate() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Get the account creation timestamp from Firebase User metadata
+            long signInTimestamp = user.getMetadata().getCreationTimestamp();
+
+            // Convert the timestamp to a Date object
+            Date signInDate = new Date(signInTimestamp);
+
+            // Format the date to a readable string
+            CharSequence formattedDate = DateFormat.format("MMMM dd, yyyy", signInDate);
+
+            // Display the formatted date in the TextView
+            signInDateText.setText("Account created at: " + formattedDate);
+        }
+    }
+
 }

@@ -90,4 +90,5 @@
     <string name="time_in_minutes">Time (in minutes)</string>
     <string name="type">Type</string>
     <string name="submit">Submit</string>
+    <string name="account_created_at">Account created at :</string>
 </resources>

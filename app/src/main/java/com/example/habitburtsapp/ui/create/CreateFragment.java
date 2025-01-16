@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.habitburtsapp.R;
 import com.example.habitburtsapp.databinding.FragmentCreateBinding;
 import com.example.habitburtsapp.ui.habits.Habit;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +34,7 @@ public class CreateFragment extends Fragment {
 
         binding = FragmentCreateBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
         // Set up the Spinner with habit types
         Spinner spinnerType = binding.spinnerType;

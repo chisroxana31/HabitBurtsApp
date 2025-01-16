@@ -16,7 +16,8 @@
         <item
             android:id="@+id/nav_create"
             android:icon="@drawable/ic_current"
-            android:title="@string/create_your_habit" />
+            android:title="Suggest habits"
+            tools:ignore="HardcodedText" />
 
         <item
             android:id="@+id/nav_settings"

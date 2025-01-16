@@ -79,11 +79,6 @@ public class HomeActivity extends AppCompatActivity {
     private void setUpToolbarAndNavigation() {
         setSupportActionBar(binding.appBarHome.toolbar);
 
-        binding.appBarHome.fab.setOnClickListener(view ->
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show()
-        );
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;

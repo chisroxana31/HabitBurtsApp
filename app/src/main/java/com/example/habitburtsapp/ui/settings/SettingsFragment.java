@@ -43,18 +43,17 @@ public class SettingsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         // Connect UI components to Java variables
-        Button changeNameButton = root.findViewById(R.id.changeNameButton);
-        Button changePasswordButton = root.findViewById(R.id.changePasswordButton);
-        Button logoutButton = root.findViewById(R.id.logoutButton);
-
-        LinearLayout nameChangeLayout = root.findViewById(R.id.nameChangeLayout);  // Updated ID
-        EditText newFirstNameField = root.findViewById(R.id.newFirstNameField);  // First name field
-        EditText newLastNameField = root.findViewById(R.id.newLastNameField);    // Last name field
+        LinearLayout changeNameSection = root.findViewById(R.id.changeNameSection);
+        EditText newFirstNameField = root.findViewById(R.id.newFirstNameField);
+        EditText newLastNameField = root.findViewById(R.id.newLastNameField);
         Button saveNameButton = root.findViewById(R.id.saveNameButton);
 
+        LinearLayout changePasswordSection = root.findViewById(R.id.changePasswordSection);
         EditText newPasswordField = root.findViewById(R.id.newPasswordField);
         EditText confirmNewPasswordField = root.findViewById(R.id.confirmNewPasswordField);
         Button savePasswordButton = root.findViewById(R.id.savePasswordButton);
+
+        Button logoutButton = root.findViewById(R.id.logoutButton);
 
         // Initialize the TextView for the sign-in date
         signInDateText = root.findViewById(R.id.signInDateText);
@@ -62,17 +61,7 @@ public class SettingsFragment extends Fragment {
         // Display the sign-in date
         displaySignInDate();
 
-        // Show layout for name change on button click (Toggling visibility)
-        changeNameButton.setOnClickListener(v -> {
-            if (nameChangeLayout.getVisibility() == View.GONE) {
-                nameChangeLayout.setVisibility(View.VISIBLE);
-                newFirstNameField.setText("");  // Clear any previous text
-                newLastNameField.setText("");   // Clear any previous text
-            } else {
-                nameChangeLayout.setVisibility(View.GONE);
-            }
-        });
-
+        // Handle change name logic
         saveNameButton.setOnClickListener(v -> {
             String newFirstName = newFirstNameField.getText().toString().trim();
             String newLastName = newLastNameField.getText().toString().trim();
@@ -85,11 +74,6 @@ public class SettingsFragment extends Fragment {
         });
 
         // Handle change password logic
-        changePasswordButton.setOnClickListener(v -> {
-            LinearLayout passwordChangeLayout = root.findViewById(R.id.passwordChangeLayout);
-            passwordChangeLayout.setVisibility(View.VISIBLE);
-        });
-
         savePasswordButton.setOnClickListener(v -> {
             String newPassword = newPasswordField.getText().toString().trim();
             String confirmNewPassword = confirmNewPasswordField.getText().toString().trim();
@@ -127,7 +111,6 @@ public class SettingsFragment extends Fragment {
                     });
         }
     }
-
 
     // Method to update user's password
     private void updatePasswordInFirestore(String newPassword) {
@@ -167,8 +150,7 @@ public class SettingsFragment extends Fragment {
             CharSequence formattedDate = DateFormat.format("MMMM dd, yyyy", signInDate);
 
             // Display the formatted date in the TextView
-            signInDateText.setText("Account created at: " + formattedDate);
+            signInDateText.setText("Account created on: " + formattedDate);
         }
     }
-
 }

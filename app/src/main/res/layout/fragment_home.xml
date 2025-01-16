@@ -6,42 +6,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TextView for greeting message -->
+    <!-- TextView for greeting message (Hi, ) -->
     <TextView
         android:id="@+id/textViewGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:text="Hi, "
         android:textSize="34sp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- TextView for "Create healthy habits" below "Hi," message -->
+    <TextView
+        android:id="@+id/textViewCreateHealthyHabits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create healthy habits!"
+        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewGreeting" />
+
+    <!-- ImageView for logo -->
+    <ImageView
+        android:id="@+id/imageViewCenter"
+        android:layout_width="196dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="148dp"
+        android:contentDescription="Centered image"
+        android:src="@mipmap/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCreateHealthyHabits" />
 
     <!-- TextView for "You've earned so far:" message -->
     <TextView
         android:id="@+id/textViewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
         android:text="You've earned so far:"
-        android:textSize="23sp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewGreeting"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewCenter" />
 
-    <!-- TextView for displaying the fixed 5 stars -->
+    <!-- TextView for displaying stars (0 ⭐) -->
     <TextView
         android:id="@+id/textViewStars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="0 ⭐"
         android:textSize="50sp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewMessage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textViewMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

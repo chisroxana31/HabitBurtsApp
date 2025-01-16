@@ -15,7 +15,7 @@
             android:id="@+id/textLine1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suggest a Habit! "
+            android:text="Suggest habits! "
             android:textSize="34sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"

@@ -2,6 +2,12 @@
 
 ## Introduction
 
+![Create Your Habit](./homeMenu.jfif)
+![Create Your Habit](./homeMenu.jfif)
+![Create Your Habit](./homeMenu.jfif)
+![Create Your Habit](./homeMenu.jfif)
+
+
 HabitBurst is an innovative app designed to help users build and maintain habits through small, time-limited challenges. Each task takes a maximum of 5 minutes, fostering productivity and personal growth without overwhelming the user.
 
 ## Why Micro-Habits?
